@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { min-height: 100%; }
+body { @apply bg-slate-50 font-sans text-slate-800 antialiased; -webkit-tap-highlight-color: transparent; }
+
+@layer components {
+  .card { @apply rounded-2xl border border-slate-200 bg-white shadow-card; }
+  .badge { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-bold; }
+  .chip { @apply rounded-full border px-4 py-1.5 text-sm font-semibold transition; }
+}
+
+.score-num { font-family: 'Barlow Condensed', Inter, sans-serif; font-variant-numeric: tabular-nums; line-height: 0.9; }
+
+@keyframes pop { 0% { transform: scale(.92); opacity: .6 } 100% { transform: scale(1); opacity: 1 } }
+.pop { animation: pop .16s ease-out; }
+@keyframes shimmer { 100% { transform: translateX(100%) } }
+.skeleton { @apply relative overflow-hidden rounded-md bg-slate-200; }
+.skeleton::after { content: ''; @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/60 to-transparent; animation: shimmer 1.2s infinite; }
+@media (prefers-reduced-motion: reduce) { .pop, .skeleton::after, .animate-pulse { animation: none } }
