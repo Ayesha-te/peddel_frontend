@@ -1,4 +1,4 @@
-export const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/$/, '')
+export const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'https://peddel.stride-events.net').replace(/\/$/, '')
 
 export class ApiError extends Error {
   status: number
