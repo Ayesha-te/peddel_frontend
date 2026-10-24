@@ -121,7 +121,7 @@ export default function TournamentPage() {
             <div className="grid h-20 w-20 place-items-center overflow-hidden rounded-2xl border-4 border-white/20 bg-white sm:h-24 sm:w-24">
               {logo ? <img src={logo} alt={`${t.name} logo`} className="h-full w-full object-cover" /> : <Trophy className="h-9 w-9 text-court-600" />}
             </div>
-            <div className="min-w-0 flex-1">
+            <div className="min-w-0 basis-full sm:basis-0 sm:flex-1">
               <PhaseBadge phase={t.phase} />
               <h1 className="mt-2 text-3xl font-extrabold leading-tight sm:text-4xl">{t.name}</h1>
               <p className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-slate-300">
