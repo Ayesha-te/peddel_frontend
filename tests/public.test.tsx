@@ -12,7 +12,7 @@ import type { MatchSnapshot } from '@/types'
 
 const TOURNAMENT = {
   slug: 'demo', name: 'Demo Open', logo: null, cover: null, venue: 'Club', startDate: '2030-01-01', endDate: '2030-01-03', phase: 'live', teamsCount: 4,
-  organizer: 'Fed', description: 'Great event', rules: '', format: 'groups_knockout', rankingCriteria: ['points'], pointsPerWin: 3,
+  organizer: 'Fed', description: 'Great event', rules: '', format: 'groups_knockout', rankingCriteria: ['points'], pointsPerWin: 3, matchFormat: { bestOf: 5, goldenPoint: true, superTiebreak: false, tiebreak: true },
   teams: [{ name: 'Alpha', group: 'Group A', players: [{ name: 'Ann', photo: null }, { name: 'Bo', photo: null }] }],
   standings: [{ group: 'Group A', isFinal: false, rows: [{ rank: 1, team: 'Alpha', played: 1, wins: 1, losses: 0, points: 3, setDifference: 2, gameDifference: 5, qualified: false }] }],
   groupFixtures: [{ round: 'Group A - Round 1', roundNumber: 1, position: 0, group: 'Group A', teamA: 'Alpha', teamB: 'Bravo',
@@ -88,6 +88,13 @@ describe('public tournament page', () => {
     }
     expect(screen.queryByRole('button', { name: /pdf|download|export/i })).toBeNull()
   })
+  it('shows the tournament match format (best of N, deuce or golden point)', async () => {
+    mockApi({ '/api/public/tournaments/demo/': TOURNAMENT })
+    render(wrap(<TournamentPage />, '/public-tournaments/demo', '/public-tournaments/:slug'))
+    expect(await screen.findByRole('heading', { name: 'Demo Open' })).toBeInTheDocument()
+    expect(screen.getByText('Best of 5 sets · Golden point')).toBeInTheDocument()
+  })
+
   it('renders not-found for unknown/private tournaments', async () => {
     mockApi({})
     render(wrap(<TournamentPage />, '/public-tournaments/secret', '/public-tournaments/:slug'))

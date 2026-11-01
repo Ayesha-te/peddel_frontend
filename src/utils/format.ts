@@ -20,3 +20,11 @@ export function setText(s: SetScore) {
   if (s.super) return `[${s.tiebreak?.[0]}-${s.tiebreak?.[1]}]`
   return `${s.games[0]}-${s.games[1]}${s.tiebreak ? `(${Math.min(...s.tiebreak)})` : ''}`
 }
+
+/** Plain-words match format, e.g. "Best of 5 sets · Golden point · Super tie-break decider". */
+export function formatText(c: { bestOf?: number; goldenPoint?: boolean; superTiebreak?: boolean; tiebreak?: boolean }) {
+  const parts = [c.bestOf === 1 ? 'Best of 1 set' : `Best of ${c.bestOf ?? 3} sets`, c.goldenPoint ? 'Golden point' : 'Deuce (advantage)']
+  if (c.tiebreak === false) parts.push('No tie-break')
+  if (c.superTiebreak && (c.bestOf ?? 3) > 1) parts.push('Super tie-break decider')
+  return parts.join(' · ')
+}

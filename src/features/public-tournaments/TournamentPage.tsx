@@ -7,7 +7,7 @@ import { getJson, imageUrl, shareUrl } from '@/api/client'
 import { EmptyState, ErrorState, PhaseBadge, Section, Skeleton } from '@/components/ui'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import type { FixtureEntry, TournamentDetail } from '@/types'
-import { fmtDateRange, fmtDateTime, setText } from '@/utils/format'
+import { fmtDateRange, fmtDateTime, formatText, setText } from '@/utils/format'
 
 type Tab = 'overview' | 'matches' | 'standings' | 'bracket' | 'teams'
 
@@ -166,7 +166,7 @@ export default function TournamentPage() {
               )}
             </div>
             <Section title="Details"><dl className="divide-y divide-slate-100 text-sm">
-              {([['Organizer', t.organizer || '—'], ['Venue', t.venue || '—'], ['Format', t.format.replace(/_/g, ' ')], ['Teams', String(t.teams.length)]] as const).map(([k, v]) => (
+              {([['Organizer', t.organizer || '—'], ['Venue', t.venue || '—'], ['Format', t.format.replace(/_/g, ' ')], ['Match format', formatText(t.matchFormat)], ['Teams', String(t.teams.length)]] as const).map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 px-5 py-3"><dt className="text-slate-500">{k}</dt><dd className="text-right font-semibold capitalize text-slate-900">{v}</dd></div>
               ))}
             </dl></Section>

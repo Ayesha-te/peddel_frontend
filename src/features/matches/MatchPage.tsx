@@ -80,7 +80,7 @@ export default function MatchPage() {
             <div className="flex items-center gap-3"><CalendarClock className="h-4 w-4 text-slate-400" /><dd>{fmtDateTime(m.scheduledAt)}</dd></div>
             <div className="flex items-center gap-3"><MapPin className="h-4 w-4 text-slate-400" /><dd>{m.court ?? 'Court to be announced'}</dd></div>
             <div className="flex items-center gap-3"><Timer className="h-4 w-4 text-slate-400" /><dd>{m.startedAt ? fmtDuration(m.durationSeconds) : 'Not started'}</dd></div>
-            <div className="flex items-center gap-3"><Radio className="h-4 w-4 text-slate-400" /><dd>Best of {m.config.bestOf}{m.config.goldenPoint ? ' · golden point' : ''}{m.config.superTiebreak ? ' · super tie-break decider' : ''}</dd></div>
+            <div className="flex items-center gap-3"><Radio className="h-4 w-4 text-slate-400" /><dd>Best of {m.config.bestOf}{m.config.goldenPoint ? ' · golden point' : ' · deuce'}{m.config.superTiebreak ? ' · super tie-break decider' : ''}</dd></div>
           </dl>
         </section>
         <section className="card p-5">

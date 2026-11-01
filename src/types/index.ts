@@ -41,6 +41,7 @@ export interface TournamentDetail extends TournamentCard {
   rules: string
   format: string
   rankingCriteria: string[]
+  matchFormat: { bestOf: number; goldenPoint: boolean; superTiebreak: boolean; tiebreak: boolean }
   pointsPerWin: number
   teams: { name: string; group: string | null; players: { name: string; photo: string | null }[] }[]
   standings: { group: string; isFinal: boolean; rows: { rank: number; team: string; played: number; wins: number; losses: number; points: number; setDifference: number; gameDifference: number; qualified: boolean }[] }[]
