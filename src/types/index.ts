@@ -70,8 +70,9 @@ export interface MatchSnapshot {
   revision: number
   scheduledAt: string | null
   court: string | null
-  tournament: { name: string; slug: string } | null
-  teams: [{ name: string; players: string[] }, { name: string; players: string[] }]
+  category?: string
+  tournament: { name: string; slug: string; logo?: string | null } | null
+  teams: [{ name: string; players: string[]; logo?: string | null }, { name: string; players: string[]; logo?: string | null }]
   state: EngineState
   config: { bestOf: number; goldenPoint: boolean; superTiebreak: boolean }
   durationSeconds: number
@@ -80,4 +81,29 @@ export interface MatchSnapshot {
   completedAt: string | null
   display: { pointLabels: [string, string]; pointKind: string; matchPointFor: number[]; setPointFor: number[]; setsWon: [number, number] } | null
   timeline?: { sequence: number; type: string; team: number | null; at: string; sets: SetScore[]; games: [number, number]; points: [string, string] }[]
+}
+
+export interface StreamMatchCard {
+  publicId: string
+  name: string
+  category: string
+  status: string
+  scheduledAt: string | null
+  court: string | null
+  teams: { name: string; players: string[]; logo: string | null }[]
+  queueStatus?: string
+}
+
+export interface StreamBrand {
+  sponsors: { id: number; name: string; url: string | null }[]
+  federation: { id: number; name: string; url: string | null } | null
+  settings: { logoAnimation: boolean; sponsorRotateSeconds: number; showDuration: boolean; hashtag?: string }
+}
+
+export interface StreamState {
+  tournament: { name: string; slug: string; logo: string | null; venue: string }
+  brand: StreamBrand
+  live: StreamMatchCard | null
+  next: StreamMatchCard | null
+  upcoming: StreamMatchCard[]
 }

@@ -8,11 +8,16 @@ import './index.css'
 const Directory = lazy(() => import('@/features/public-tournaments/DirectoryPage'))
 const Tournament = lazy(() => import('@/features/public-tournaments/TournamentPage'))
 const Match = lazy(() => import('@/features/matches/MatchPage'))
+const Overlay = lazy(() => import('@/features/stream/OverlayPage'))
+const Led = lazy(() => import('@/features/stream/LedPage'))
 
 const fallback = <div className="mx-auto max-w-6xl px-4 py-10"><div className="skeleton h-40 w-full rounded-2xl" /></div>
 const S = ({ children }: { children: React.ReactNode }) => <Suspense fallback={fallback}>{children}</Suspense>
 
 const router = createBrowserRouter([
+  // broadcast screens: no site chrome at all (OBS Browser Source / LED display)
+  { path: 'stream/overlay/:matchId?', element: <Suspense fallback={null}><Overlay /></Suspense> },
+  { path: 'stream/led/:matchId?', element: <Suspense fallback={null}><Led /></Suspense> },
   {
     element: <PublicLayout />,
     children: [
