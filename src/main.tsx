@@ -5,6 +5,15 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import PublicLayout from '@/layouts/PublicLayout'
 import './index.css'
 
+// After a redeploy, an open tab may request old hashed files that no longer exist: reload once to pick up the new build.
+window.addEventListener('vite:preloadError', () => {
+  try {
+    if (sessionStorage.getItem('chunk-reload')) return
+    sessionStorage.setItem('chunk-reload', '1')
+  } catch { /* storage unavailable: still reload once below */ }
+  window.location.reload()
+})
+
 const Directory = lazy(() => import('@/features/public-tournaments/DirectoryPage'))
 const Tournament = lazy(() => import('@/features/public-tournaments/TournamentPage'))
 const Match = lazy(() => import('@/features/matches/MatchPage'))
